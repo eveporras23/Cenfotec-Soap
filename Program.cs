@@ -1,5 +1,16 @@
+using SoapCore;
+using SoapCore_Demo;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// STEP 1 . add the singleton
+builder.Services.AddSingleton<IAuthorService,AuthorService>();
+
 var app = builder.Build();
+
+// STEP 2 . add use soapendpoind
+
+app.UseSoapEndpoint<IAuthorService>("/Service.asmx", new SoapEncoderOptions());
 
 app.Urls.Add("http://localhost:5000");
 
